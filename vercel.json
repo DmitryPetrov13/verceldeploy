@@ -2,26 +2,26 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/app.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.9"
-      }
+      "src": "api/index.py",
+      "use": "@vercel/python"
     },
     {
-      "src": "static/*",
+      "src": "public/*",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/static/$1"
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.py"
     },
     {
       "src": "/(.*)",
-      "dest": "api/app.py"
+      "dest": "api/index.py"
     }
   ]
 }
