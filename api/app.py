@@ -1,21 +1,15 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, send_from_directory
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 
 @app.route('/')
-def serve_home():
-    return send_from_directory(app.static_folder, 'index.html')
+def serve_index():
+    return send_from_directory('../static', 'index.html')
 
 @app.route('/api/hello')
 def hello():
-    return jsonify({
-        "message": "Hello from the API!",
-        "status": "success"
-    })
+    return {'message': 'Hello from Flask on Vercel!'}
 
 @app.route('/api/greet/<name>')
 def greet(name):
-    return jsonify({
-        "message": f"Hello, {name}!",
-        "status": "success"
-    })
+    return {'message': f'Hello, {name}!'}
